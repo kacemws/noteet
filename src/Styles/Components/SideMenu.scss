@@ -66,13 +66,13 @@
 
         margin: 0px auto;
 
+        position: absolute;
         border-radius: 100%;
-        transition: 50ms ease-in;
+        transition: 25ms ease-in;
 
         &.first {
           background: #ffcf7d;
           z-index: 10;
-          opacity: 1; // only display the first one
         }
         &.second {
           z-index: 9;
@@ -81,14 +81,17 @@
         &.third {
           z-index: 8;
           background: #b095f6;
+          // top: 100px;
         }
         &.fourth {
           z-index: 7;
           background: #55cffa;
+          // top: 140px;
         }
         &.fifth {
           z-index: 6;
           background: #e6ee96;
+          // top: 180px;
         }
       }
     }
