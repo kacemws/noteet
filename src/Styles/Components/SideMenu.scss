@@ -17,6 +17,7 @@
   }
 
   .notes-container {
+    filter: url(#gooey-effect);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -67,8 +68,11 @@
         margin: 0px auto;
 
         position: absolute;
+        top: -20px;
         border-radius: 100%;
         transition: 25ms ease-in;
+
+        cursor: pointer;
 
         &.first {
           background: #ffcf7d;
