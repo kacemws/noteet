@@ -17,29 +17,29 @@ export const Sidemenu: React.FC<{}> = () => {
   const firstSelector = useSpring({
     top: open ? 20 : -20,
     opacity: open ? 1 : 0,
-    delay: open ? 350 : 100,
+    delay: open ? 350 : 300,
   });
   const secondSelector = useSpring({
-    top: open ? 80 : 20,
+    top: open ? 70 : 20,
     opacity: open ? 1 : 0,
-    delay: open ? 700 : 200,
+    delay: open ? 700 : 250,
   });
 
   const thirdSelector = useSpring({
-    top: open ? 140 : 80,
+    top: open ? 120 : 70,
     opacity: open ? 1 : 0,
-    delay: open ? 1050 : 300,
+    delay: open ? 1050 : 200,
   });
 
   const fourthSelector = useSpring({
-    top: open ? 200 : 140,
+    top: open ? 170 : 120,
     opacity: open ? 1 : 0,
-    delay: open ? 1400 : 400,
+    delay: open ? 1400 : 150,
   });
   const fifthSelector = useSpring({
-    top: open ? 260 : 200,
+    top: open ? 220 : 170,
     opacity: open ? 1 : 0,
-    delay: open ? 1750 : 500,
+    delay: open ? 1750 : 100,
   });
 
   return (
