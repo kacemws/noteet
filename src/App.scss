@@ -1,0 +1,46 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  /* Load system fonts */
+  font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI,
+    Roboto, Helvetica Neue, sans-serif;
+
+  /* Make type rendering look crisper */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Disable auto-enlargement of small text in Safari */
+  text-size-adjust: 100%;
+
+  /* Enable kerning and optional ligatures */
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
