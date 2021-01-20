@@ -3,7 +3,11 @@ import plus from "../Assets/plus.svg";
 import { useState } from "react";
 import { useSpring, animated } from "react-spring";
 
-export const Sidemenu: React.FC<{}> = () => {
+interface props {
+  setSelected: (index: number) => void;
+}
+
+export const Sidemenu: React.FC<props> = ({ setSelected }) => {
   const [open, setOpen] = useState(false);
 
   const buttonProps = useSpring({
@@ -17,28 +21,33 @@ export const Sidemenu: React.FC<{}> = () => {
   const firstSelector = useSpring({
     top: open ? 20 : -20,
     opacity: open ? 1 : 0,
+    cursor: open ? "pointer" : "default",
     delay: open ? 350 : 300,
   });
   const secondSelector = useSpring({
     top: open ? 70 : 20,
     opacity: open ? 1 : 0,
+    cursor: open ? "pointer" : "default",
     delay: open ? 700 : 250,
   });
 
   const thirdSelector = useSpring({
     top: open ? 120 : 70,
     opacity: open ? 1 : 0,
+    cursor: open ? "pointer" : "default",
     delay: open ? 1050 : 200,
   });
 
   const fourthSelector = useSpring({
     top: open ? 170 : 120,
     opacity: open ? 1 : 0,
+    cursor: open ? "pointer" : "default",
     delay: open ? 1400 : 150,
   });
   const fifthSelector = useSpring({
     top: open ? 220 : 170,
     opacity: open ? 1 : 0,
+    cursor: open ? "pointer" : "default",
     delay: open ? 1750 : 100,
   });
 
