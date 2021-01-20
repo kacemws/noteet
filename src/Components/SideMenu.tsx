@@ -99,7 +99,7 @@ export const Sidemenu: React.FC<props> = ({ setSelected }) => {
                         ? () => {}
                         : () => {
                             setOpen(false);
-                            setSelected(index + 1); // set the chosen value
+                            setSelected(index); // set the chosen value
                           }
                     }
                   />
