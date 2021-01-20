@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useSpring, animated } from "react-spring";
 
 interface props {
-  setSelected: (index: number) => void;
+  setSelected: (index: number | null | undefined) => void;
 }
 
 export const Sidemenu: React.FC<props> = ({ setSelected }) => {
@@ -61,17 +61,51 @@ export const Sidemenu: React.FC<props> = ({ setSelected }) => {
               className="addNote"
               onClick={() => {
                 setOpen(!open);
+                setSelected(null); // if closing then set the thing to null;
               }}
             >
               <animated.img src={plus} style={buttonProps} alt="Plus Icon" />
             </button>
           </div>
           <animated.div className="items" style={blockProps}>
-            <animated.div className="selector first" style={firstSelector} />
-            <animated.div className="selector second" style={secondSelector} />
-            <animated.div className="selector third" style={thirdSelector} />
-            <animated.div className="selector fourth" style={fourthSelector} />
-            <animated.div className="selector fifth" style={fifthSelector} />
+            {["first", "second", "third", "fourth", "fifth"].map(
+              (number, index) => {
+                let style;
+                switch (index) {
+                  case 0:
+                    style = firstSelector;
+                    break;
+                  case 1:
+                    style = secondSelector;
+                    break;
+                  case 2:
+                    style = thirdSelector;
+                    break;
+                  case 3:
+                    style = fourthSelector;
+                    break;
+
+                  default:
+                    style = fifthSelector;
+                    break;
+                }
+                return (
+                  <animated.div
+                    key={number}
+                    className={`selector ${number}`}
+                    style={style}
+                    onClick={
+                      !open
+                        ? () => {}
+                        : () => {
+                            setOpen(false);
+                            setSelected(index + 1); // set the chosen value
+                          }
+                    }
+                  />
+                );
+              }
+            )}
           </animated.div>
         </div>
       </div>
