@@ -14,7 +14,7 @@ export const Panel: React.FC<props> = ({ notes, ...rest }) => {
 
       <div className="notes">
         {notes.map((note, index) => {
-          return <Card key={index} note={note} />;
+          return <Card key={index} note={note} index={index} />;
         })}
       </div>
     </div>

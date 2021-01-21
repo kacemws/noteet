@@ -7,18 +7,36 @@ import { useSpring, animated } from "react-spring";
 
 interface props {
   note: Note;
+  index: number;
 }
-export const Card: React.FC<props> = ({ note, ...rest }) => {
-  const [rendred, setRendered] = useState(false);
-
+export const Card: React.FC<props> = ({ note, index, ...rest }) => {
+  const [animate, setAnimate] = useState(false);
   useEffect(() => {
-    setRendered(true);
-  }, []);
+    if (index == 0) {
+      console.log("will animate " + note.color + " : " + index);
 
-  const cardProps = useSpring({
-    marginLeft: rendred ? 0 : -200,
+      setAnimate(false);
+      setTimeout(() => {
+        setAnimate(true);
+      }, 100);
+    } else {
+      console.log("changed index");
+    }
+  }, [note]);
+  const firstProp = useSpring({
+    marginLeft: animate ? 16 : -200,
+    width: animate ? 350 : 0,
+    height: animate ? 310 : 0,
     backgroundColor: note.color,
   });
-
-  return <animated.div className="note" style={cardProps}></animated.div>;
+  const cardProps = useSpring({
+    backgroundColor: note.color,
+  });
+  return (
+    <animated.div
+      key={index}
+      className="note"
+      style={index ? cardProps : firstProp}
+    ></animated.div>
+  );
 };
