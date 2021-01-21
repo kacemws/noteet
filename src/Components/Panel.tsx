@@ -5,7 +5,7 @@ interface props {
   notes: Array<Note>;
 }
 
-export const Panel: React.FC<props> = ({ notes }) => {
+export const Panel: React.FC<props> = ({ notes, ...rest }) => {
   return (
     <div className="panel">
       <div className="header">
@@ -13,8 +13,8 @@ export const Panel: React.FC<props> = ({ notes }) => {
       </div>
 
       <div className="notes">
-        {notes.map((_) => {
-          return <Card />;
+        {notes.map((note, index) => {
+          return <Card key={index} note={note} />;
         })}
       </div>
     </div>

@@ -7,7 +7,7 @@ interface props {
   setSelected: (index: number | null | undefined) => void;
 }
 
-export const Sidemenu: React.FC<props> = ({ setSelected }) => {
+export const Sidemenu: React.FC<props> = ({ setSelected, ...rest }) => {
   const [open, setOpen] = useState(false);
 
   const buttonProps = useSpring({

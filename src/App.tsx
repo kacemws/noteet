@@ -24,13 +24,11 @@ function App() {
     >
       <Sidemenu
         setSelected={(index: number | null | undefined) => {
-          console.log(index);
           setselected(index);
 
           if (index != null && index != undefined) {
             const aux = new Note(colors[index], "");
             notes.unshift(aux);
-            console.log(notes);
             setNotes(notes);
           }
         }}
