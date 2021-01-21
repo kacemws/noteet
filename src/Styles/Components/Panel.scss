@@ -1,5 +1,21 @@
 .panel {
   height: 100%;
+  overflow-y: auto;
   flex: 1;
   background-color: var(--text-inverted);
+
+  padding: 24px 32px;
+  .header {
+    h2 {
+      font-size: 40px;
+      margin: 0;
+      line-height: 1;
+      color: var(--text);
+    }
+  }
+  .notes {
+    padding: 0 12px;
+    display: flex;
+    flex-wrap: wrap;
+  }
 }

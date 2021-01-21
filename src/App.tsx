@@ -3,15 +3,7 @@ import { Panel } from "./Components/Panel";
 import { Sidemenu } from "./Components/SideMenu";
 import "./Styles/App.scss";
 import "./Styles/colors.scss";
-
-class Note {
-  color: string;
-  note: string;
-  constructor(color: string, note: string) {
-    this.color = color;
-    this.note = note;
-  }
-}
+import { Note } from "./utils/Note";
 
 const colors = ["#ffcf7d", "#f0a177", "#b095f6", "#55cffa", "#e6ee96"];
 
@@ -43,7 +35,7 @@ function App() {
           }
         }}
       />
-      <Panel></Panel>
+      <Panel notes={notes} />
     </div>
   );
 }
