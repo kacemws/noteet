@@ -25,7 +25,6 @@ function App() {
       <Sidemenu
         setSelected={(index: number | null | undefined) => {
           setselected(index);
-
           if (index != null && index != undefined) {
             const aux = new Note(colors[index], "");
             notes.unshift(aux);
@@ -33,7 +32,12 @@ function App() {
           }
         }}
       />
-      <Panel notes={notes} />
+      <Panel
+        notes={notes}
+        updateNotes={(notes: Array<Note>) => {
+          setNotes(notes);
+        }}
+      />
     </div>
   );
 }

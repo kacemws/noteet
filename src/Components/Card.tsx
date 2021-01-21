@@ -9,11 +9,13 @@ import { useSpring, animated } from "react-spring";
 interface props {
   note: Note;
   index: number;
+  updateNote: (note: Note, index: number) => void;
 }
-export const Card: React.FC<props> = ({ note, index, ...rest }) => {
+export const Card: React.FC<props> = ({ note, index, updateNote, ...rest }) => {
   const [animate, setAnimate] = useState(false);
-  const [value, setValue] = useState(note.note);
+  const [value, setValue] = useState("");
   useEffect(() => {
+    setValue(note.note);
     if (index == 0) {
       console.log("will animate " + note.color + " : " + index);
 
@@ -53,8 +55,13 @@ export const Card: React.FC<props> = ({ note, index, ...rest }) => {
           <span>May 21, 2020</span>
         </div>
         <div className="edit">
-          <button>
-            <img src={save} alt="Edit Icon" />
+          <button
+            disabled={value == note.note || !value}
+            onClick={(_) => {
+              updateNote(new Note(note.color, value), index);
+            }}
+          >
+            <img src={note.note ? edit : save} alt="Edit Icon" />
           </button>
         </div>
       </div>
