@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import edit from "../Assets/edit.svg";
 import "../Styles/Components/Card.scss";
 import { Note } from "../utils/Note";
@@ -24,9 +24,10 @@ export const Card: React.FC<props> = ({ note, index, ...rest }) => {
     }
   }, [note]);
   const firstProp = useSpring({
-    marginLeft: animate ? 16 : -200,
+    // marginLeft: animate ? 16 : -200,
     width: animate ? 350 : 0,
     height: animate ? 310 : 0,
+    opacity: animate ? 1 : 0,
     backgroundColor: note.color,
   });
   const cardProps = useSpring({
@@ -37,6 +38,21 @@ export const Card: React.FC<props> = ({ note, index, ...rest }) => {
       key={index}
       className="note"
       style={index ? cardProps : firstProp}
-    ></animated.div>
+    >
+      <textarea
+        // type="text"
+        placeholder="Type your note"
+      ></textarea>
+      <div className="footer">
+        <div className="date">
+          <span>May 21, 2020</span>
+        </div>
+        <div className="edit">
+          <button>
+            <img src={edit} alt="Edit Icon" />
+          </button>
+        </div>
+      </div>
+    </animated.div>
   );
 };
