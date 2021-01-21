@@ -52,7 +52,13 @@ export const Card: React.FC<props> = ({ note, index, updateNote, ...rest }) => {
       ></textarea>
       <div className="footer">
         <div className="date">
-          <span>May 21, 2020</span>
+          <span>
+            {new Intl.DateTimeFormat("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "2-digit",
+            }).format(Date.parse(note.date.toDateString()))}
+          </span>
         </div>
         <div className="edit">
           <button
