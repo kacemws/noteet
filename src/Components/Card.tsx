@@ -29,7 +29,7 @@ export const Card: React.FC<props> = ({ note, index, updateNote, ...rest }) => {
   }, [note]);
   const firstProp = useSpring({
     marginLeft: animate ? 16 : -200,
-    width: animate ? 350 : 0,
+    width: animate ? 310 : 0,
     height: animate ? 310 : 0,
     opacity: animate ? 1 : 0,
     backgroundColor: note.color,
@@ -67,7 +67,7 @@ export const Card: React.FC<props> = ({ note, index, updateNote, ...rest }) => {
               updateNote(new Note(note.color, value), index);
             }}
           >
-            <img src={note.note ? edit : save} alt="Edit Icon" />
+            <animated.img src={note.note ? edit : save} alt="Edit Icon" />
           </button>
         </div>
       </div>
