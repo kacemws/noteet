@@ -5,21 +5,13 @@ import "../Styles/Components/Card.scss";
 import { Note } from "../utils/Note";
 
 import { useSpring, animated } from "react-spring";
-import { DraggableProvided } from "react-beautiful-dnd";
 
 interface props {
   note: Note;
   index: number;
-  provided: DraggableProvided;
   updateNote: (note: Note, index: number) => void;
 }
-export const Card: React.FC<props> = ({
-  note,
-  index,
-  provided,
-  updateNote,
-  ...rest
-}) => {
+export const Card: React.FC<props> = ({ note, index, updateNote, ...rest }) => {
   const [animate, setAnimate] = useState(false);
   const [value, setValue] = useState("");
   useEffect(() => {
@@ -36,7 +28,7 @@ export const Card: React.FC<props> = ({
     }
   }, [note]);
   const firstProp = useSpring({
-    // marginLeft: animate ? 16 : -200,
+    marginLeft: animate ? 16 : -200,
     width: animate ? 350 : 0,
     height: animate ? 310 : 0,
     opacity: animate ? 1 : 0,
@@ -46,45 +38,39 @@ export const Card: React.FC<props> = ({
     backgroundColor: note.color,
   });
   return (
-    <div
-      ref={provided.innerRef}
-      {...provided.draggableProps}
-      {...provided.dragHandleProps}
+    <animated.div
+      key={note.id}
+      className="note"
+      style={index ? cardProps : firstProp}
     >
-      <animated.div
-        key={note.id}
-        className="note"
-        style={index ? cardProps : firstProp}
-      >
-        <textarea
-          placeholder="Type your note"
-          value={value}
-          onChange={({ target }) => {
-            setValue(target.value);
-          }}
-        ></textarea>
-        <div className="footer">
-          <div className="date">
-            <span>
-              {new Intl.DateTimeFormat("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "2-digit",
-              }).format(Date.parse(note.date.toDateString()))}
-            </span>
-          </div>
-          <div className="edit">
-            <button
-              disabled={value == note.note || !value}
-              onClick={(_) => {
-                updateNote(new Note(note.color, value), index);
-              }}
-            >
-              <img src={note.note ? edit : save} alt="Edit Icon" />
-            </button>
-          </div>
+      <textarea
+        placeholder="Type your note"
+        value={value}
+        onChange={({ target }) => {
+          setValue(target.value);
+        }}
+      ></textarea>
+      <div className="footer">
+        <div className="date">
+          <span>
+            {new Intl.DateTimeFormat("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "2-digit",
+            }).format(Date.parse(note.date.toDateString()))}
+          </span>
         </div>
-      </animated.div>
-    </div>
+        <div className="edit">
+          <button
+            disabled={value == note.note || !value}
+            onClick={(_) => {
+              updateNote(new Note(note.color, value), index);
+            }}
+          >
+            <img src={note.note ? edit : save} alt="Edit Icon" />
+          </button>
+        </div>
+      </div>
+    </animated.div>
   );
 };
