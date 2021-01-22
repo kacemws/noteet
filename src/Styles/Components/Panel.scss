@@ -1,21 +1,30 @@
+@import "../breakpoints.scss";
+
 .panel {
   height: 100%;
   overflow-y: auto;
   flex: 1;
-  background-color: var(--text-inverted);
-
-  padding: 24px 32px;
+  padding: 1.5rem 2rem;
+  @include media("<=tablet") {
+    padding: 1.5rem 1rem;
+  }
   .header {
     h2 {
-      font-size: 40px;
+      font-size: 2rem;
       margin: 0;
       line-height: 1;
       color: var(--text);
     }
   }
   .notes {
-    padding: 0 12px;
+    padding: 0 0.75rem;
+    @include media("<=tablet") {
+      padding: 0;
+    }
     display: flex;
     flex-wrap: wrap;
+    @include media("<=tablet") {
+      justify-content: center;
+    }
   }
 }
