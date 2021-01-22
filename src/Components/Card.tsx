@@ -41,6 +41,13 @@ export const Card: React.FC<props> = ({
     opacity: animate ? 1 : 0,
     backgroundColor: note.color,
   });
+
+  const deleteButtonProps = useSpring({
+    opacity: note?.note ? 1 : 0,
+    height: note?.note ? 48 : 0,
+    width: note?.note ? 48 : 0,
+  });
+
   const cardProps = useSpring({
     backgroundColor: note.color,
   });
@@ -67,35 +74,34 @@ export const Card: React.FC<props> = ({
             }).format(Date.parse(note.date.toDateString()))}
           </span>
         </div>
-        <div className="edit">
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-end",
-            }}
-          >
-            {note.note ? (
-              <button
-                onClick={(_) => {
-                  console.log("will delete note");
-                  deleteNote(index);
-                }}
-              >
-                <animated.img src={trash} alt="delete Icon" />
-              </button>
-            ) : (
-              <></>
-            )}
-            <button
-              disabled={value == note.note || !value}
+        <div
+          className="edit"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-end",
+          }}
+        >
+          {note.note ? (
+            <animated.button
+              style={deleteButtonProps}
               onClick={(_) => {
-                updateNote(new Note(note.color, value), index);
+                deleteNote(index);
               }}
             >
-              <animated.img src={save} alt="Save Icon" />
-            </button>
-          </div>
+              <animated.img src={trash} alt="delete Icon" />
+            </animated.button>
+          ) : (
+            <></>
+          )}
+          <button
+            disabled={value == note.note || !value}
+            onClick={(_) => {
+              updateNote(new Note(note.color, value), index);
+            }}
+          >
+            <animated.img src={save} alt="Save Icon" />
+          </button>
         </div>
       </div>
     </animated.div>
