@@ -35,7 +35,7 @@ export const Card: React.FC<props> = ({
     }
   }, [note]);
   const firstProp = useSpring({
-    marginLeft: animate ? 16 : -200,
+    marginLeft: animate ? "1rem" : "-12.5rem",
     width: animate ? 310 : 0,
     height: animate ? 310 : 0,
     opacity: animate ? 1 : 0,
@@ -44,8 +44,8 @@ export const Card: React.FC<props> = ({
 
   const deleteButtonProps = useSpring({
     opacity: note?.note ? 1 : 0,
-    height: note?.note ? 48 : 0,
-    width: note?.note ? 48 : 0,
+    height: note?.note ? "3rem" : "0rem",
+    width: note?.note ? "3rem" : "0rem",
   });
 
   const cardProps = useSpring({
