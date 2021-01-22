@@ -1,13 +1,27 @@
+@import "../breakpoints.scss";
+
 .side-menu {
   height: 100%;
-  width: 7.5%;
-  background-color: var(--text-inverted);
+  width: 8%;
   border-right: solid 1px;
   border-color: var(--neutral-300);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 32px 16px;
+  padding: 2rem 1rem;
+
+  @include media("<SMdesktop") {
+    width: 10%;
+    padding: 2rem 0.5rem;
+  }
+
+  @include media("<=tablet") {
+    width: 15%;
+  }
+  @include media("<=phone") {
+    padding: 2rem 0rem;
+    width: 17.5%;
+  }
   .logo {
     font-family: inherit;
     font-size: 1.25rem;
@@ -23,14 +37,14 @@
     align-items: center;
     justify-content: space-evenly;
     .add-button {
-      margin-top: 40px;
+      margin-top: 2.5rem;
       .addNote {
         z-index: 21;
         border-radius: 100%;
         background: var(--text);
         border: none;
-        height: 48px;
-        width: 48px;
+        height: 3rem;
+        width: 3rem;
         outline: none;
         position: relative;
         cursor: pointer;
@@ -42,14 +56,14 @@
         }
         img {
           transition: 350ms ease-out;
-          width: 28px;
-          height: 28px;
+          width: 1.75rem;
+          height: 1.75rem;
         }
       }
     }
 
     .items {
-      height: 256px;
+      height: 16rem;
 
       display: flex;
       flex-direction: column;
@@ -62,13 +76,13 @@
       z-index: 10;
 
       .selector {
-        height: 32px;
-        width: 32px;
+        height: 2rem;
+        width: 2rem;
 
-        margin: 0px auto;
+        margin: 0 auto;
 
         position: absolute;
-        top: -20px;
+        top: -1.25rem;
         border-radius: 100%;
         transition: 25ms ease-in;
 
@@ -85,17 +99,14 @@
         &.third {
           z-index: 8;
           background: #b095f6;
-          // top: 100px;
         }
         &.fourth {
           z-index: 7;
           background: #55cffa;
-          // top: 140px;
         }
         &.fifth {
           z-index: 6;
           background: #e6ee96;
-          // top: 180px;
         }
       }
     }

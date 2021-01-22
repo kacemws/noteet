@@ -15,13 +15,7 @@ function App() {
   const [notes, setNotes] = useState<Array<Note>>([]);
 
   return (
-    <div
-      style={{
-        height: "100%",
-        width: "100%",
-        display: "flex",
-      }}
-    >
+    <div className="view">
       <Sidemenu
         setSelected={(index: number | null | undefined) => {
           setselected(index);

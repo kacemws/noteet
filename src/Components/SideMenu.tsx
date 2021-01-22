@@ -15,7 +15,7 @@ export const Sidemenu: React.FC<props> = ({ setSelected, ...rest }) => {
   });
 
   const blockProps = useSpring({
-    marginTop: open ? 0 : -24,
+    marginTop: open ? "0" : "-24",
   });
 
   const firstSelector = useSpring({
