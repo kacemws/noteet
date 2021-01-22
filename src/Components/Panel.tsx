@@ -15,6 +15,14 @@ export const Panel: React.FC<props> = ({ notes, updateNotes, ...rest }) => {
     updateNotes(newNotes);
   };
 
+  const deleteNote = (index: number) => {
+    const newNotes = [...notes];
+    newNotes.splice(index, 1);
+    console.log({ index, notes: newNotes });
+
+    updateNotes(newNotes);
+  };
+
   return (
     <div className="panel">
       <div className="header">
@@ -24,7 +32,13 @@ export const Panel: React.FC<props> = ({ notes, updateNotes, ...rest }) => {
       <div className="notes">
         {notes.map((note, index) => {
           return (
-            <Card note={note} index={index} updateNote={updateSingleNote} />
+            <Card
+              key={index}
+              note={note}
+              index={index}
+              updateNote={updateSingleNote}
+              deleteNote={deleteNote}
+            />
           );
         })}
       </div>

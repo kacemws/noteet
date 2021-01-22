@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import edit from "../Assets/edit.svg";
+import trash from "../Assets/trash.svg";
 import save from "../Assets/save.svg";
 import "../Styles/Components/Card.scss";
 import { Note } from "../utils/Note";
@@ -10,8 +10,15 @@ interface props {
   note: Note;
   index: number;
   updateNote: (note: Note, index: number) => void;
+  deleteNote: (index: number) => void;
 }
-export const Card: React.FC<props> = ({ note, index, updateNote, ...rest }) => {
+export const Card: React.FC<props> = ({
+  note,
+  index,
+  updateNote,
+  deleteNote,
+  ...rest
+}) => {
   const [animate, setAnimate] = useState(false);
   const [value, setValue] = useState("");
   useEffect(() => {
@@ -61,14 +68,34 @@ export const Card: React.FC<props> = ({ note, index, updateNote, ...rest }) => {
           </span>
         </div>
         <div className="edit">
-          <button
-            disabled={value == note.note || !value}
-            onClick={(_) => {
-              updateNote(new Note(note.color, value), index);
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-end",
             }}
           >
-            <animated.img src={note.note ? edit : save} alt="Edit Icon" />
-          </button>
+            {note.note ? (
+              <button
+                onClick={(_) => {
+                  console.log("will delete note");
+                  deleteNote(index);
+                }}
+              >
+                <animated.img src={trash} alt="delete Icon" />
+              </button>
+            ) : (
+              <></>
+            )}
+            <button
+              disabled={value == note.note || !value}
+              onClick={(_) => {
+                updateNote(new Note(note.color, value), index);
+              }}
+            >
+              <animated.img src={save} alt="Save Icon" />
+            </button>
+          </div>
         </div>
       </div>
     </animated.div>
