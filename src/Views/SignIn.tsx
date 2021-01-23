@@ -15,6 +15,7 @@ export default function Signin() {
   const onSubmit = (data: any) => {
     if (!innerLoading) {
       setInnerLoading(true);
+      history.push("/notes");
     }
   };
 

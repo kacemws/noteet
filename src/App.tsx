@@ -2,18 +2,27 @@ import "./Styles/App.scss";
 import "./Styles/colors.scss";
 import NoteView from "./Views/NoteView";
 import Signin from "./Views/SignIn";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div
-      style={{
-        height: "100%",
-        minHeight: "100vh",
-      }}
-    >
-      {/* <NoteView /> */}
-      <Signin />
-    </div>
+    <Router>
+      <div
+        style={{
+          height: "100%",
+          minHeight: "100vh",
+        }}
+      >
+        <Switch>
+          <Route exact path="/">
+            <Signin />
+          </Route>
+          <Route path="/notes">
+            <NoteView />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
