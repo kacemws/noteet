@@ -1,0 +1,20 @@
+@mixin selection {
+  ::-moz-selection {
+    @content;
+  }
+  ::selection {
+    @content;
+  }
+}
+
+@mixin animation-keyframes {
+  $animation-number: 0 !default !global;
+  $animation-number: $animation-number + 1 !global;
+  $name: unquote("การเคลื่อนไหวที่-#{$animation-number}");
+  animation-name: $name;
+  @at-root {
+    @keyframes #{$name} {
+      @content;
+    }
+  }
+}
