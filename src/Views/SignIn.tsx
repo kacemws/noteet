@@ -2,21 +2,21 @@ import React, { useState } from "react";
 import "../Styles/Views/SignIn.scss";
 import LandingImage from "../Components/image";
 // import logo from "../Assets/neo.png";
-// import { useForm } from "react-hook-form";
-// import { useHistory } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 export default function Signin() {
-  //   const history = useHistory();
+  const history = useHistory();
 
-  //   const { register, handleSubmit, errors, setError } = useForm({
-  //     mode: "onBlur",
-  //   }); //settings for react hook form
+  const { register, handleSubmit, errors, setError } = useForm({
+    mode: "onBlur",
+  }); //settings for react hook form
 
   const [innerLoading, setInnerLoading] = useState(false); // to know wheter we are fetching data or not
-  //   const onSubmit = (data) => {
-  //     if (!innerLoading) {
-  //       setInnerLoading(true);
-  //     }
-  //   };
+  const onSubmit = (data: any) => {
+    if (!innerLoading) {
+      setInnerLoading(true);
+    }
+  };
 
   return (
     <div className="sign-in">
@@ -66,35 +66,34 @@ export default function Signin() {
             {/*Title*/}
 
             {/*Form*/}
-            <form
-              onSubmit={() => {
-                // handleSubmit(onSubmit)
-              }}
-            >
+            <form onSubmit={handleSubmit(onSubmit)}>
               {/*Username field*/}
               <div className="input-container">
-                <label className="label" htmlFor="username">
+                <label className="label" htmlFor="email">
                   Email
                 </label>
                 <input
                   className="input"
-                  //   style={{
-                  //     borderColor: errors.username && "red",
-                  //   }}
+                  style={{
+                    borderColor: errors.email && "red",
+                  }}
                   type="text"
-                  name="username"
-                  //   ref={register({
-                  //     required: true,
-                  //     maxLength: 20,
-                  //   })}
+                  name="email"
+                  ref={register({
+                    required: true,
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                      message: "Entered value does not match email format",
+                    },
+                  })}
                 />
-                {/* {errors.username && (
+                {errors.email && (
                   <div className="error">
-                    {errors.username.type === "manual"
-                      ? errors.username.message
-                      : "Veuillez introduire une valeur valide"}
+                    {errors.email.type === "manual"
+                      ? errors?.email?.message
+                      : errors?.email?.message ?? "Invalid data"}
                   </div>
-                )} */}
+                )}
               </div>
               {/*Username field*/}
 
@@ -108,19 +107,15 @@ export default function Signin() {
                   className="input"
                   type="password"
                   name="password"
-                  //   ref={register({
-                  //     required: true,
-                  //     minLength: 8,
-                  //   })}
-                  //   style={{
-                  //     borderColor: errors.password && "red",
-                  //   }}
+                  ref={register({
+                    required: true,
+                    minLength: 8,
+                  })}
+                  style={{
+                    borderColor: errors.password && "red",
+                  }}
                 />
-                {/* {errors.password && (
-                  <div className="error">
-                    Veuillez introduire une valeur valide
-                  </div>
-                )} */}
+                {errors.password && <div className="error">Invalid data</div>}
               </div>
               {/*Password field*/}
 
