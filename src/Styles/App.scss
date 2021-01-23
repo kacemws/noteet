@@ -58,3 +58,53 @@ body,
 #root {
   height: 100%;
 }
+
+.greetings {
+  margin-bottom: 1.25rem;
+
+  @include media("<=SMdesktop") {
+    margin-bottom: 0.825rem;
+  }
+
+  @include media("<=tablet") {
+    margin-bottom: 0.85rem;
+  }
+
+  @include media("<=605px") {
+    margin-bottom: 0.7rem;
+  }
+
+  @include media("<=phone") {
+    margin-bottom: 0.575rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 500;
+    margin: 0.25rem 0;
+    @include media("<=SMdesktop") {
+      margin: 0.2rem 0;
+    }
+
+    @include media("<=tablet") {
+      margin: 0.15rem 0;
+    }
+  }
+  h3 {
+    font-weight: 400;
+    margin: 0.15rem 0;
+    @include media("<=SMdesktop") {
+      margin: 0.125rem 0;
+    }
+
+    @include media("<=tablet") {
+      margin: 0.1rem 0;
+    }
+    .highlited {
+      color: var(--primary-300);
+      font-weight: 500;
+      cursor: pointer;
+    }
+  }
+}
