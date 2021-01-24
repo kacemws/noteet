@@ -4,6 +4,8 @@ import LandingImage from "../Components/image";
 // import logo from "../Assets/neo.png";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
+
 export default function Signin() {
   const history = useHistory();
 
@@ -12,10 +14,25 @@ export default function Signin() {
   }); //settings for react hook form
 
   const [innerLoading, setInnerLoading] = useState(false); // to know wheter we are fetching data or not
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
     if (!innerLoading) {
       setInnerLoading(true);
-      history.push("/notes");
+      try {
+        const answ = await axios.post(
+          "http://192.168.0.136:8083/user/login",
+          data
+        );
+        console.log(answ.data);
+        history.push("/notes");
+      } catch (err) {
+        setInnerLoading(false);
+        if (err?.response?.status == 400) {
+          setError("email", {
+            type: "manual",
+            message: "Email/password combo not found",
+          });
+        }
+      }
     }
   };
 
