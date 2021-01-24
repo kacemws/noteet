@@ -4,6 +4,7 @@ import LandingImage from "../Components/image";
 // import logo from "../Assets/neo.png";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 export default function Signup() {
   const history = useHistory();
@@ -14,11 +15,27 @@ export default function Signup() {
 
   const [innerLoading, setInnerLoading] = useState(false); // to know wheter we are fetching data or not
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
     if (!innerLoading) {
       setInnerLoading(true);
-      //   let aux = Object.assign({}, data);
-      //   delete aux["confirm_password"];
+      try {
+        let aux = Object.assign({}, data);
+        delete aux["confirm_password"];
+        // const answ = await axios.post(
+        //   "http://192.168.1.41:8083/user/signup",
+        //   aux
+        // );
+        // console.log(answ.data);
+      } catch (err) {
+        console.log(err);
+        setInnerLoading(false);
+        if (err?.response?.status == 400) {
+          setError("email", {
+            type: "manual",
+            message: "An account with this email already exists",
+          });
+        }
+      }
       //   aux.phone_number = "+213" + aux.phone_number.substring(1);
     }
   };
@@ -84,40 +101,40 @@ export default function Signup() {
               {/*first & last name field*/}
               <div className="name-container">
                 <div className="input-container">
-                  <label className="label" htmlFor="last_name">
+                  <label className="label" htmlFor="lastName">
                     Last name
                   </label>
                   <input
                     className="input"
                     type="text"
-                    name="last_name"
+                    name="lastName"
                     ref={register({
                       required: true,
                     })}
                     style={{
-                      borderColor: errors.last_name && "red",
+                      borderColor: errors.lastName && "red",
                     }}
                   />
-                  {errors.last_name && (
+                  {errors.lastName && (
                     <div className="error">Invalid last name</div>
                   )}
                 </div>
                 <div className="input-container">
-                  <label className="label" htmlFor="first_name">
+                  <label className="label" htmlFor="firstName">
                     First name
                   </label>
                   <input
                     className="input"
                     type="text"
-                    name="first_name"
+                    name="firstName"
                     ref={register({
                       required: true,
                     })}
                     style={{
-                      borderColor: errors.first_name && "red",
+                      borderColor: errors.firstName && "red",
                     }}
                   />
-                  {errors.first_name && (
+                  {errors.firstName && (
                     <div className="error">Invalid first name</div>
                   )}
                 </div>
