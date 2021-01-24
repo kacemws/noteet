@@ -119,7 +119,7 @@ export default function Signin() {
               <div className="input-container">
                 <label className="label" htmlFor="password">
                   <div>Password</div>
-                  <div className="forgot-password">Forgot password ?</div>
+                  {/* <div className="forgot-password">Forgot password ?</div> */}
                 </label>
                 <input
                   className="input"
