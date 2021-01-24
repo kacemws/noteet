@@ -1,0 +1,318 @@
+@import "../variables.scss";
+@import "../breakpoints.scss";
+
+.sign-up {
+  height: 100vh;
+  width: 100%;
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    .left-part {
+      height: 100%;
+      width: 65%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      background-color: var(--neutral-200);
+
+      @include media("<tablet") {
+        display: none;
+      }
+      .header {
+        height: 10%;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        .logo {
+          padding-left: 2rem;
+          width: 80px;
+        }
+      }
+      .content {
+        height: 90%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .legend {
+        height: 10%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+    .right-part {
+      height: 100%;
+      width: 35%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--neutral-100);
+      @include media("<tablet") {
+        width: 100%;
+      }
+      overflow-y: auto;
+      .right-part-inner {
+        // height: 90%;
+        width: 80%;
+        padding: 2rem 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .logo {
+          display: none;
+          @include media("<tablet") {
+            display: inline-block;
+          }
+          width: 80px;
+          margin: 0 auto;
+        }
+
+        form {
+          .input-container {
+            margin-bottom: 0.25rem; // tofix
+            .label {
+              margin-bottom: 0.25rem;
+              font-size: 1.25rem;
+              line-height: 1.5rem;
+              font-weight: 500;
+              //   font-family: $fonts;
+              display: flex;
+              justify-content: space-between;
+
+              @include media("<=SMdesktop") {
+                font-size: 1rem;
+              }
+
+              @include media("<=tablet") {
+                font-size: 1rem;
+              }
+              @include media("<tablet") {
+                font-size: 1.25rem;
+              }
+
+              @include media("<=605px") {
+                font-size: 1rem;
+              }
+
+              @include media("<=phone") {
+                font-size: 1rem;
+              }
+
+              .forgot-password {
+                color: var(--primary-300);
+                &:hover {
+                  cursor: pointer;
+                  color: var(--primary-400);
+                }
+              }
+            }
+
+            .input {
+              width: 100%;
+              padding: 0.75rem 0.5rem;
+              margin-top: 0.3rem;
+              outline: none;
+              border-radius: 0.25rem;
+              //   border-width: 2px;
+              //   border-color: rgba(106, 10, 10, 0);
+              border: 2px solid rgba(36, 36, 36, 0.5);
+              &:focus {
+                background-color: var(--neutral-300);
+              }
+
+              font-size: 1rem;
+
+              @include media("<=SMdesktop") {
+                font-size: 0.875rem;
+              }
+
+              @include media("<=tablet") {
+                font-size: 1rem;
+              }
+
+              @include media("<=605px") {
+                font-size: 0.875rem;
+              }
+
+              @include media("<=phone") {
+                font-size: 0.75rem;
+              }
+            }
+            .error {
+              color: red;
+              font-size: 0.75rem;
+              font-weight: 500;
+
+              @include media("<=SMdesktop") {
+                font-size: 0.575rem;
+              }
+
+              @include media("<=tablet") {
+                font-size: 0.75rem;
+              }
+
+              @include media("<=605px") {
+                font-size: 0.575rem;
+              }
+
+              @include media("<=phone") {
+                font-size: 0.35rem;
+              }
+            }
+          }
+
+          .name-container {
+            display: flex;
+            justify-content: space-between;
+
+            @include media("<=855px") {
+              flex-direction: column;
+            }
+            .input-container {
+              width: 45%;
+              @include media("<=855px") {
+                width: 100%;
+              }
+              .label {
+                font-size: 1.25rem;
+                @include media("<=1037px") {
+                  font-size: 1.2rem;
+                }
+                @include media("<=SMdesktop") {
+                  font-size: 1rem;
+                }
+
+                @include media("<=tablet") {
+                  font-size: 1.25rem;
+                }
+
+                @include media("<=605px") {
+                  font-size: 1rem;
+                }
+
+                @include media("<=phone") {
+                  font-size: 1rem;
+                }
+              }
+            }
+          }
+
+          .button {
+            position: relative;
+            .submit-button {
+              width: 100%;
+              height: 100%;
+              padding: 0.9rem 0rem;
+              margin: 0.5rem 0; // to fix
+
+              color: white;
+              background-color: var(--primary-300);
+              border-radius: 0.5rem;
+              border: none;
+
+              cursor: pointer;
+              outline: none;
+              transition: 0.1s ease-in-out;
+              font-weight: 500;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              //   font-family: $fonts;
+
+              font-size: 1rem;
+
+              @include media("<=SMdesktop") {
+                font-size: 0.875rem;
+                margin: 0.4rem 0; // to fix
+              }
+
+              @include media("<=tablet") {
+                font-size: 1rem;
+                margin: 0.3rem 0; // to fix
+              }
+
+              @include media("<=605px") {
+                font-size: 0.875rem;
+                margin: 0.15rem 0; // to fix
+              }
+
+              @include media("<=phone") {
+                font-size: 0.75rem;
+                margin: 0; // to fix
+              }
+
+              &:hover {
+                background-color: var(--primary-300);
+              }
+            }
+            .overlay {
+              background-color: rgba(0, 0, 0, 0.75);
+              height: 100%;
+              width: 100%;
+              position: absolute;
+              left: 0;
+              top: 0;
+              border-radius: 0.5rem;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              .spinner {
+                border: 0.25rem solid #f3f3f3; /* Light grey */
+                border-top: 0.25rem solid var(--secondary-300); /* Blue */
+                border-radius: 50%;
+                width: 1rem;
+                height: 1rem;
+                animation: spin 1s linear infinite;
+                @include animation-keyframes {
+                  from {
+                    transform: rotate(0deg);
+                  }
+                  to {
+                    transform: rotate(360deg);
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .sign-in {
+          height: 0%;
+          h3 {
+            font-weight: 400;
+            margin: 0.15rem 0;
+            @include media("<=SMdesktop") {
+              margin: 0.125rem 0;
+            }
+
+            @include media("<=tablet") {
+              margin: 0.1rem 0;
+            }
+
+            @include media("<=605px") {
+              margin: 0.15rem 0;
+            }
+
+            @include media("<=phone") {
+              margin: 0.15rem 0;
+            }
+            .highlited {
+              color: var(--primary-300);
+              font-weight: 500;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+}

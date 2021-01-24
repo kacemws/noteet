@@ -74,7 +74,7 @@ export default function Signin() {
                 <span
                   className="highlited"
                   onClick={(_) => {
-                    // if (!innerLoading) history.push("sign-up");
+                    if (!innerLoading) history.push("sign-up");
                   }}
                 >
                   Signup !
