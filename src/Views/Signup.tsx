@@ -9,7 +9,7 @@ export default function Signup() {
   const history = useHistory();
 
   const { register, handleSubmit, errors, getValues, setError } = useForm({
-    mode: "onBlur",
+    mode: "onChange",
   }); //settings for react hook form
 
   const [innerLoading, setInnerLoading] = useState(false); // to know wheter we are fetching data or not
@@ -55,7 +55,7 @@ export default function Signup() {
               {/*Username field*/}
               <div className="input-container">
                 <label className="label" htmlFor="username">
-                  username
+                  Username
                 </label>
                 <input
                   className="input"
@@ -73,7 +73,7 @@ export default function Signup() {
                   <div className="error">
                     {errors.username.type === "manual"
                       ? errors.username.message
-                      : "Veuillez introduire une valeur valide"}
+                      : "Invalid username"}
                   </div>
                 ) : (
                   ""
@@ -85,7 +85,7 @@ export default function Signup() {
               <div className="name-container">
                 <div className="input-container">
                   <label className="label" htmlFor="last_name">
-                    Nom
+                    Last name
                   </label>
                   <input
                     className="input"
@@ -99,14 +99,12 @@ export default function Signup() {
                     }}
                   />
                   {errors.last_name && (
-                    <div className="error">
-                      Veuillez introduire une valeur valide
-                    </div>
+                    <div className="error">Invalid last name</div>
                   )}
                 </div>
                 <div className="input-container">
                   <label className="label" htmlFor="first_name">
-                    Prénoms
+                    First name
                   </label>
                   <input
                     className="input"
@@ -120,9 +118,7 @@ export default function Signup() {
                     }}
                   />
                   {errors.first_name && (
-                    <div className="error">
-                      Veuillez introduire une valeur valide
-                    </div>
+                    <div className="error">Invalid first name</div>
                   )}
                 </div>
               </div>
@@ -139,8 +135,9 @@ export default function Signup() {
                   name="email"
                   ref={register({
                     required: true,
-                    validate: (value) => {
-                      return value.includes("@");
+                    pattern: {
+                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                      message: "Entered value does not match email format",
                     },
                   })}
                   style={{
@@ -149,11 +146,9 @@ export default function Signup() {
                 />
                 {errors.email && (
                   <div className="error">
-                    {errors.email.type === "validate"
-                      ? "Veuillez inclure un @"
-                      : errors.email.type === "manual"
+                    {["pattern", "manual"].includes(errors.email.type)
                       ? errors.email.message
-                      : "Veuillez introduire une valeur valide"}
+                      : "Invalid email"}
                   </div>
                 )}
               </div>
@@ -193,7 +188,7 @@ export default function Signup() {
               {/*Password field*/}
               <div className="input-container">
                 <label className="label" htmlFor="password">
-                  Mot de passe
+                  Password
                 </label>
                 <input
                   className="input"
@@ -208,9 +203,7 @@ export default function Signup() {
                   }}
                 />
                 {errors.password && (
-                  <div className="error">
-                    Veuillez introduire une valeur valide
-                  </div>
+                  <div className="error">Invalid password</div>
                 )}
               </div>
               {/*Password field*/}
@@ -218,7 +211,7 @@ export default function Signup() {
               {/*Confirm Password field*/}
               <div className="input-container">
                 <label className="label" htmlFor="confirm_password">
-                  Confirmez votre Mot de passe
+                  Confirm password !
                 </label>
                 <input
                   className="input"
@@ -236,16 +229,14 @@ export default function Signup() {
                   }}
                 />
                 {errors.confirm_password && (
-                  <div className="error">
-                    Veuillez saisire une valeur correspondante
-                  </div>
+                  <div className="error">passwords not matching</div>
                 )}
               </div>
               {/*Confirm Password field*/}
 
               <div className="button">
                 <button className="submit-button" type="submit">
-                  S'inscrire
+                  Signup
                 </button>
                 {innerLoading && (
                   <div className="overlay">
@@ -258,7 +249,7 @@ export default function Signup() {
 
             <div className="sign-in">
               <h3>
-                Déjà membre ?
+                Already a member ?
                 <span
                   className="highlited"
                   onClick={(_) => {
@@ -266,7 +257,7 @@ export default function Signup() {
                   }}
                 >
                   {" "}
-                  Connectez-vous!
+                  Sign in !
                 </span>
               </h3>
             </div>

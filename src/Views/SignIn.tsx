@@ -10,7 +10,7 @@ export default function Signin() {
   const history = useHistory();
 
   const { register, handleSubmit, errors, setError } = useForm({
-    mode: "onBlur",
+    mode: "onChange",
   }); //settings for react hook form
 
   const [innerLoading, setInnerLoading] = useState(false); // to know wheter we are fetching data or not
@@ -18,11 +18,11 @@ export default function Signin() {
     if (!innerLoading) {
       setInnerLoading(true);
       try {
-        const answ = await axios.post(
-          "http://192.168.0.136:8083/user/login",
-          data
-        );
-        console.log(answ.data);
+        // const answ = await axios.post(
+        //   "http://192.168.1.41:8083/user/login",
+        //   data
+        // );
+        // console.log(answ.data);
         history.push("/notes");
       } catch (err) {
         setInnerLoading(false);
