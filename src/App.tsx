@@ -19,7 +19,7 @@ function App() {
 
   const [interval, setIntervalHandler] = useState<number>(0);
 
-  const [fetchingToken, setFetchingToken] = useState(true); // a variable that checks wheter we are refreshing the token or not
+  const [fetchingToken, setFetchingToken] = useState(token == ""); // a variable that checks wheter we are refreshing the token or not
 
   useEffect(() => {
     window.clearInterval(interval); // to clear all sets interval for the check cookie function
@@ -34,6 +34,7 @@ function App() {
       refreshToken.length > 0
     ) {
       // if cookie expired
+      setFetchingToken(true);
       refreshExpiredToken(refreshToken).then((res) => {
         console.log(res);
 
