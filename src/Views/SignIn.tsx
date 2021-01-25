@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { login } from "../api/connect.instance";
 import Cookies from "js-cookie";
-import { setAuthToken } from "../api/axios";
 
 export default function Signin() {
   const history = useHistory();
@@ -27,7 +26,6 @@ export default function Signin() {
           expires: in15minutes,
         });
         localStorage.setItem("refreshToken", answ.data.refreshToken);
-        setAuthToken(answ.data.accessToken);
       } catch (err) {
         setInnerLoading(false);
         if (err?.response?.status == 400) {

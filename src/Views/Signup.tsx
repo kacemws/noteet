@@ -5,7 +5,6 @@ import LandingImage from "../Components/image";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { signup } from "../api/connect.instance";
-import { setAuthToken } from "../api/axios";
 import Cookies from "js-cookie";
 
 export default function Signup() {
@@ -30,7 +29,6 @@ export default function Signup() {
           expires: in15minutes,
         });
         localStorage.setItem("refreshToken", answ.data.refreshToken);
-        setAuthToken(answ.data.accessToken);
 
         setInnerLoading(false);
         // history.push("/notes");
