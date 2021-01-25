@@ -4,7 +4,9 @@ import LandingImage from "../Components/image";
 // import logo from "../Assets/neo.png";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
+import { signup } from "../api/connect.instance";
+import { setAuthToken } from "../api/axios";
+import Cookies from "js-cookie";
 
 export default function Signup() {
   const history = useHistory();
@@ -21,13 +23,10 @@ export default function Signup() {
       try {
         let aux = Object.assign({}, data);
         delete aux["confirm_password"];
-        // const answ = await axios.post(
-        //   "http://192.168.1.41:8083/user/signup",
-        //   aux
-        // );
-        // console.log(answ.data);
+
+        // history.push("/notes");
       } catch (err) {
-        console.log(err);
+        console.log({ err });
         setInnerLoading(false);
         if (err?.response?.status == 400) {
           setError("email", {
@@ -70,76 +69,6 @@ export default function Signup() {
             {/*Form*/}
             <form onSubmit={handleSubmit(onSubmit)}>
               {/*Username field*/}
-              <div className="input-container">
-                <label className="label" htmlFor="username">
-                  Username
-                </label>
-                <input
-                  className="input"
-                  style={{
-                    borderColor: errors.username && "red",
-                  }}
-                  type="text"
-                  name="username"
-                  ref={register({
-                    required: true,
-                    maxLength: 20,
-                  })}
-                />
-                {errors.username ? (
-                  <div className="error">
-                    {errors.username.type === "manual"
-                      ? errors.username.message
-                      : "Invalid username"}
-                  </div>
-                ) : (
-                  ""
-                )}
-              </div>
-              {/*Username field*/}
-
-              {/*first & last name field*/}
-              <div className="name-container">
-                <div className="input-container">
-                  <label className="label" htmlFor="lastName">
-                    Last name
-                  </label>
-                  <input
-                    className="input"
-                    type="text"
-                    name="lastName"
-                    ref={register({
-                      required: true,
-                    })}
-                    style={{
-                      borderColor: errors.lastName && "red",
-                    }}
-                  />
-                  {errors.lastName && (
-                    <div className="error">Invalid last name</div>
-                  )}
-                </div>
-                <div className="input-container">
-                  <label className="label" htmlFor="firstName">
-                    First name
-                  </label>
-                  <input
-                    className="input"
-                    type="text"
-                    name="firstName"
-                    ref={register({
-                      required: true,
-                    })}
-                    style={{
-                      borderColor: errors.firstName && "red",
-                    }}
-                  />
-                  {errors.firstName && (
-                    <div className="error">Invalid first name</div>
-                  )}
-                </div>
-              </div>
-              {/*first & last name field*/}
 
               {/*Email field*/}
               <div className="input-container">
@@ -170,6 +99,77 @@ export default function Signup() {
                 )}
               </div>
               {/*Email field*/}
+
+              {/* <div className="input-container">
+                <label className="label" htmlFor="username">
+                  Username
+                </label>
+                <input
+                  className="input"
+                  style={{
+                    borderColor: errors.username && "red",
+                  }}
+                  type="text"
+                  name="username"
+                  ref={register({
+                    required: true,
+                    maxLength: 20,
+                  })}
+                />
+                {errors.username ? (
+                  <div className="error">
+                    {errors.username.type === "manual"
+                      ? errors.username.message
+                      : "Invalid username"}
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div> */}
+              {/*Username field*/}
+
+              {/*first & last name field*/}
+              <div className="name-container">
+                <div className="input-container">
+                  <label className="label" htmlFor="firstName">
+                    First name
+                  </label>
+                  <input
+                    className="input"
+                    type="text"
+                    name="firstName"
+                    ref={register({
+                      required: true,
+                    })}
+                    style={{
+                      borderColor: errors.firstName && "red",
+                    }}
+                  />
+                  {errors.firstName && (
+                    <div className="error">Invalid first name</div>
+                  )}
+                </div>
+                <div className="input-container">
+                  <label className="label" htmlFor="lastName">
+                    Last name
+                  </label>
+                  <input
+                    className="input"
+                    type="text"
+                    name="lastName"
+                    ref={register({
+                      required: true,
+                    })}
+                    style={{
+                      borderColor: errors.lastName && "red",
+                    }}
+                  />
+                  {errors.lastName && (
+                    <div className="error">Invalid last name</div>
+                  )}
+                </div>
+              </div>
+              {/*first & last name field*/}
 
               {/*Phone field*/}
               {/* <div className="input-container">
