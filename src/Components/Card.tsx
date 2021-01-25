@@ -29,6 +29,7 @@ export const Card: React.FC<props> = ({
         setAnimate(true);
       }, 100);
     } else {
+      console.log(note);
       console.log("changed index");
     }
   }, [note]);
@@ -95,8 +96,9 @@ export const Card: React.FC<props> = ({
           <button
             disabled={value == note.note || !value}
             onClick={(_) => {
-              // if a note has an id, we wouldn't change it. if not create a new one
-              const newNote = note.note == "" ? new Note(note.color, "") : note;
+              // if a note has an id with a length diffrent than 5, we wouldn't change it. if not create a new one
+              console.log(note);
+              const newNote = note;
               newNote.note = value;
               updateNote(newNote, index);
             }}

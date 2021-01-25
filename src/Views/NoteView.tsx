@@ -26,7 +26,7 @@ function NoteView() {
     getNotes()
       .then((resp) => {
         setFetchingNotes(false);
-        const data = resp?.data?.notes?.map((note: any) => {
+        const data = resp?.notes?.map((note: any) => {
           return {
             id: note["_id"],
             color: note.color,
@@ -65,21 +65,22 @@ function NoteView() {
             type: "add" | "delete" | "update",
             id?: string
           ) => {
-            const note = notes.find((note) => note.id == id);
+            const index = notes.findIndex((note) => note.id == id);
             // console.log(note);
             setFetchingNotes(true);
-            console.log({ type, note });
+            console.log({ type, note: notes[index] });
             try {
               if (type == "add") {
-                await postNote({
-                  value: note?.note,
-                  color: note?.color,
+                const answ = await postNote({
+                  value: notes[index]?.note,
+                  color: notes[index]?.color,
                 });
+                notes[index].id = answ?.id;
               } else if (type == "update") {
                 await updateNote({
-                  id: note?.id,
-                  value: note?.note,
-                  color: note?.color,
+                  id: notes[index]?.id,
+                  value: notes[index]?.note,
+                  color: notes[index]?.color,
                 });
               } else {
                 await deleteNote({

@@ -13,11 +13,10 @@ interface props {
 export const Panel: React.FC<props> = ({ notes, updateNotes, ...rest }) => {
   const updateSingleNote = (note: Note, index: number) => {
     const newNotes = [...notes];
-    const auxNote = newNotes[index];
     newNotes[index] = note;
-    console.log({ index, notes: newNotes });
+    console.log({ note, index, notes: newNotes });
 
-    updateNotes(newNotes, auxNote.note == "" ? "add" : "update", note.id);
+    updateNotes(newNotes, note.id.length == 5 ? "add" : "update", note.id);
   };
 
   const deleteNote = (index: number) => {
