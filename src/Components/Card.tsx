@@ -24,8 +24,6 @@ export const Card: React.FC<props> = ({
   useEffect(() => {
     setValue(note.note);
     if (index == 0) {
-      console.log("will animate " + note.color + " : " + index);
-
       setAnimate(false);
       setTimeout(() => {
         setAnimate(true);
@@ -97,7 +95,10 @@ export const Card: React.FC<props> = ({
           <button
             disabled={value == note.note || !value}
             onClick={(_) => {
-              updateNote(new Note(note.color, value), index);
+              // if a note has an id, we wouldn't change it. if not create a new one
+              const newNote = note.note == "" ? new Note(note.color, "") : note;
+              newNote.note = value;
+              updateNote(newNote, index);
             }}
           >
             <animated.img src={save} alt="Save Icon" />
