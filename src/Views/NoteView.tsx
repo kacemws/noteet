@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import { getNotes, postNote, updateNote } from "../api/notes.instance";
+import {
+  deleteNote,
+  getNotes,
+  postNote,
+  updateNote,
+} from "../api/notes.instance";
 import Loader from "../Components/Loader";
 import { Panel } from "../Components/Panel";
 import { Sidemenu } from "../Components/SideMenu";
@@ -77,7 +82,9 @@ function NoteView() {
                   color: note?.color,
                 });
               } else {
-                console.log(id);
+                await deleteNote({
+                  id,
+                });
               }
               setFetchingNotes(false);
 

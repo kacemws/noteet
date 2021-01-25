@@ -29,7 +29,10 @@ export const updateNote = async (data: any) => {
 
 export const deleteNote = async (data: any) => {
   try {
-    const answ = await instance.delete("notes", data);
+    console.log(data);
+    const answ = await instance.delete("notes", {
+      data,
+    });
     return answ;
   } catch (err) {
     throw err;
