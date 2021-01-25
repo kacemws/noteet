@@ -230,6 +230,9 @@
               &:hover {
                 background-color: var(--primary-400);
               }
+              &:focus {
+                background-color: var(--primary-400);
+              }
             }
             .overlay {
               background-color: rgba(0, 0, 0, 0.75);

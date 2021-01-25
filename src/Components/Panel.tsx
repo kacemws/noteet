@@ -1,6 +1,9 @@
 import "../Styles/Components/Panel.scss";
 import { Note } from "../utils/Note";
 import { Card } from "./Card";
+import logout from "../Assets/logout.svg";
+import Cookies from "js-cookie";
+
 interface props {
   notes: Array<Note>;
   updateNotes: (
@@ -31,20 +34,30 @@ export const Panel: React.FC<props> = ({ notes, updateNotes, ...rest }) => {
     <div className="panel">
       <div className="header">
         <h2>Your Notes</h2>
+        <button
+          className="logout-button"
+          onClick={() => {
+            Cookies.set("accessToken", "");
+            localStorage.removeItem("refreshToken");
+          }}
+        >
+          <img src={logout} alt="Logout Icon" />
+        </button>
       </div>
-
-      <div className="notes">
-        {notes.map((note, index) => {
-          return (
-            <Card
-              key={index}
-              note={note}
-              index={index}
-              updateNote={updateSingleNote}
-              deleteNote={deleteNote}
-            />
-          );
-        })}
+      <div className="notes-wrapper">
+        <div className="notes">
+          {notes.map((note, index) => {
+            return (
+              <Card
+                key={index}
+                note={note}
+                index={index}
+                updateNote={updateSingleNote}
+                deleteNote={deleteNote}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   );
