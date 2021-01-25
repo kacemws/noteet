@@ -78,7 +78,22 @@
 
         form {
           .input-container {
-            margin-bottom: 0.25rem; // tofix
+            margin-bottom: 1rem; // tofix
+            @include media("<=SMdesktop") {
+              margin-bottom: 0.75rem; // tofix
+            }
+
+            @include media("<=tablet") {
+              margin-bottom: 1.35rem; // tofix
+            }
+
+            @include media("<=605px") {
+              margin-bottom: 1.25rem; // tofix
+            }
+
+            @include media("<=phone") {
+              margin-bottom: 1rem; // tofix
+            }
             .label {
               margin-bottom: 0.25rem;
               font-size: 1.25rem;
@@ -161,11 +176,11 @@
               }
 
               @include media("<=605px") {
-                font-size: 0.575rem;
+                font-size: 0.75rem;
               }
 
               @include media("<=phone") {
-                font-size: 0.35rem;
+                font-size: 0.7rem;
               }
             }
           }

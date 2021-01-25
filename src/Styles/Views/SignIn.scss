@@ -173,11 +173,11 @@
               }
 
               @include media("<=605px") {
-                font-size: 0.575rem;
+                font-size: 0.75rem;
               }
 
               @include media("<=phone") {
-                font-size: 0.35rem;
+                font-size: 0.7rem;
               }
             }
           }
