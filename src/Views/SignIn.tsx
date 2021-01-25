@@ -4,7 +4,9 @@ import LandingImage from "../Components/image";
 // import logo from "../Assets/neo.png";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import axios from "axios";
+import { login } from "../api/connect.instance";
+import Cookies from "js-cookie";
+import { setAuthToken } from "../api/axios";
 
 export default function Signin() {
   const history = useHistory();
@@ -18,12 +20,14 @@ export default function Signin() {
     if (!innerLoading) {
       setInnerLoading(true);
       try {
-        // const answ = await axios.post(
-        //   "http://192.168.1.41:8083/user/login",
-        //   data
-        // );
-        // console.log(answ.data);
-        history.push("/notes");
+        const answ = await login(data);
+        console.log(answ.data);
+        var in15minutes = new Date(new Date().getTime() + 900000);
+        Cookies.set("accessToken", answ.data.accessToken, {
+          expires: in15minutes,
+        });
+        localStorage.setItem("refreshToken", answ.data.refreshToken);
+        setAuthToken(answ.data.accessToken);
       } catch (err) {
         setInnerLoading(false);
         if (err?.response?.status == 400) {

@@ -23,7 +23,16 @@ export default function Signup() {
       try {
         let aux = Object.assign({}, data);
         delete aux["confirm_password"];
+        const answ = await signup(aux);
+        console.log(answ.data);
+        var in15minutes = new Date(new Date().getTime() + 900000);
+        Cookies.set("accessToken", answ.data.accessToken, {
+          expires: in15minutes,
+        });
+        localStorage.setItem("refreshToken", answ.data.refreshToken);
+        setAuthToken(answ.data.accessToken);
 
+        setInnerLoading(false);
         // history.push("/notes");
       } catch (err) {
         console.log({ err });
