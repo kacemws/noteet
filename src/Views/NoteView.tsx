@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getNotes } from "../api/notes.instance";
+import Loader from "../Components/Loader";
 import { Panel } from "../Components/Panel";
 import { Sidemenu } from "../Components/SideMenu";
 import "../Styles/Views/NoteView.scss";
@@ -13,24 +15,51 @@ function NoteView() {
 
   const [notes, setNotes] = useState<Array<Note>>([]);
 
+  const [fetchingNotes, setFetchingNotes] = useState(true);
+
+  useEffect(() => {
+    getNotes()
+      .then((resp) => {
+        setFetchingNotes(false);
+        const data = resp?.data?.notes?.map((note: any) => {
+          return {
+            id: note["_id"],
+            color: note.color,
+            note: note.value,
+            date: new Date(note.createdAt),
+          };
+        });
+        setNotes(data ?? []);
+      })
+      .catch((err) => {
+        console.log({ err });
+      });
+  }, []);
+
   return (
     <div className="view">
       <Sidemenu
         setSelected={(index: number | null | undefined) => {
-          setselected(index);
-          if (index != null && index != undefined) {
-            const aux = new Note(colors[index], "");
-            notes.unshift(aux);
-            setNotes(notes);
+          if (!fetchingNotes) {
+            setselected(index);
+            if (index != null && index != undefined) {
+              const aux = new Note(colors[index], "");
+              notes.unshift(aux);
+              setNotes(notes);
+            }
           }
         }}
       />
-      <Panel
-        notes={notes}
-        updateNotes={(notes: Array<Note>) => {
-          setNotes(notes);
-        }}
-      />
+      {fetchingNotes ? (
+        <Loader />
+      ) : (
+        <Panel
+          notes={notes}
+          updateNotes={(notes: Array<Note>) => {
+            setNotes(notes);
+          }}
+        />
+      )}
     </div>
   );
 }
