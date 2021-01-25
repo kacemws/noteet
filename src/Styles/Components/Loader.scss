@@ -1,0 +1,26 @@
+@import "../variables.scss";
+@import "../breakpoints.scss";
+.container {
+  height: 100%;
+  width: 100%;
+  background-color: (--neutral-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .loader {
+    border: 0.25rem solid #f3f3f3; /* Light grey */
+    border-top: 0.25rem solid var(--secondary-300); /* Blue */
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    animation: spin 1s linear infinite;
+    @include animation-keyframes {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  }
+}
