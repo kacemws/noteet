@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getNotes } from "../api/notes.instance";
+import { getNotes, postNote, updateNote } from "../api/notes.instance";
 import Loader from "../Components/Loader";
 import { Panel } from "../Components/Panel";
 import { Sidemenu } from "../Components/SideMenu";
@@ -55,8 +55,37 @@ function NoteView() {
       ) : (
         <Panel
           notes={notes}
-          updateNotes={(notes: Array<Note>) => {
-            setNotes(notes);
+          updateNotes={async (
+            notes: Array<Note>,
+            type: "add" | "delete" | "update",
+            id?: string
+          ) => {
+            const note = notes.find((note) => note.id == id);
+            // console.log(note);
+            setFetchingNotes(true);
+            console.log({ type, note });
+            try {
+              if (type == "add") {
+                await postNote({
+                  value: note?.note,
+                  color: note?.color,
+                });
+              } else if (type == "update") {
+                await updateNote({
+                  id: note?.id,
+                  value: note?.note,
+                  color: note?.color,
+                });
+              } else {
+                console.log(id);
+              }
+              setFetchingNotes(false);
+
+              setNotes(notes);
+            } catch (err) {
+              console.log(err);
+              setFetchingNotes(false);
+            }
           }}
         />
       )}
