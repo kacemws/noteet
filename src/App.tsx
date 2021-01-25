@@ -8,6 +8,7 @@ import Signup from "./Views/Signup";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { refreshExpiredToken, setAuthToken } from "./api/axios";
+import Loader from "./Components/Loader";
 
 function App() {
   /*Token*/
@@ -119,18 +120,7 @@ function App() {
           minHeight: "100vh",
         }}
       >
-        {/* <Switch>
-          <Route exact path="/">
-            <Signin />
-          </Route>
-          <Route exact path="/sign-up">
-            <Signup />
-          </Route>
-          <Route path="/notes">
-            <NoteView />
-          </Route>
-        </Switch> */}
-        {routes}
+        {fetchingToken ? <Loader /> : routes}
       </div>
     </Router>
   );
