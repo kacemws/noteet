@@ -21,7 +21,13 @@ function NoteView() {
   const [notes, setNotes] = useState<Array<Note>>([]);
 
   const [fetchingNotes, setFetchingNotes] = useState(true);
-  const [fetching, setFetching] = useState(false);
+  const [fetching, setFetching] = useState<{
+    state: boolean;
+    action: "add" | "delete";
+  }>({
+    state: false,
+    action: "add",
+  });
 
   useEffect(() => {
     getNotes()
@@ -69,7 +75,10 @@ function NoteView() {
           ) => {
             const index = notes.findIndex((note) => note.id == id);
             // console.log(note);
-            setFetching(true);
+            setFetching({
+              state: true,
+              action: ["add", "update"].includes(type) ? "add" : "delete",
+            });
             console.log({ type, note: notes[index] });
             try {
               if (type == "add") {
@@ -90,8 +99,11 @@ function NoteView() {
                 });
               }
               setTimeout(() => {
-                setFetching(false);
-              }, 500);
+                setFetching({
+                  state: false,
+                  action: "add",
+                });
+              }, 1500);
 
               setNotes(notes);
             } catch (err) {

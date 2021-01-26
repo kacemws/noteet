@@ -7,7 +7,10 @@ import Cookies from "js-cookie";
 
 interface props {
   notes: Array<Note>;
-  fetching: boolean;
+  fetching: {
+    state: boolean;
+    action: "delete" | "add";
+  };
   updateNotes: (
     notes: Array<Note>,
     type: "add" | "delete" | "update", // to know the type of operation to do with the db
@@ -22,7 +25,7 @@ export const Panel: React.FC<props> = ({
   ...rest
 }) => {
   const updateSingleNote = (note: Note, index: number) => {
-    if (!fetching) {
+    if (!fetching?.state) {
       const newNotes = [...notes];
       newNotes[index] = note;
       console.log({ note, index, notes: newNotes });
@@ -32,7 +35,7 @@ export const Panel: React.FC<props> = ({
   };
 
   const deleteNote = (index: number) => {
-    if (!fetching) {
+    if (!fetching?.state) {
       const newNotes = [...notes];
       const note = newNotes.splice(index, 1);
       console.log({ index, notes: newNotes });
@@ -72,7 +75,10 @@ export const Panel: React.FC<props> = ({
           </div>
         </div>
       </div>
-      <Toast style="success" animate={fetching} />
+      <Toast
+        style={fetching.action == "add" ? "success" : "danger"}
+        animate={fetching.state}
+      />
     </>
   );
 };

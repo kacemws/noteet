@@ -28,11 +28,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: var(--neutral-100);
+    outline-style: auto;
+    outline-width: 2px;
+
     &.success {
-      background-color: var(--neutral-100);
-      outline-style: auto;
-      outline-color: var(--primary-400);
-      outline-width: 2px;
+      outline-color: var(--success-300);
+      color: var(--success-300) !important;
+    }
+    &.danger {
+      outline-color: var(--danger-300);
+      color: var(--danger-300) !important;
     }
     h2 {
       font-family: inherit;
