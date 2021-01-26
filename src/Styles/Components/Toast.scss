@@ -1,0 +1,44 @@
+@import "../breakpoints.scss";
+
+.toast-wrapper {
+  position: absolute;
+  bottom: 0;
+  right: 0%;
+  height: 100%;
+  z-index: 999;
+  width: 92%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  @include media("<SMdesktop") {
+    width: 90%;
+  }
+
+  @include media("<=tablet") {
+    width: 85%;
+  }
+  @include media("<=phone") {
+    width: 82.5%;
+  }
+  .toast {
+    height: 6rem;
+    width: 24rem;
+    // margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &.success {
+      background-color: var(--neutral-100);
+      outline-style: auto;
+      outline-color: var(--primary-400);
+      outline-width: 2px;
+    }
+    h2 {
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1.5rem;
+    }
+  }
+}
