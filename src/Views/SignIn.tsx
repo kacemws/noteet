@@ -19,17 +19,13 @@ export default function Signin() {
     if (!innerLoading) {
       setInnerLoading(true);
       try {
-        // const answ = await login(data);
-        // console.log(answ.data);
+        const answ = await login(data);
+        console.log(answ.data);
         var in15minutes = new Date(new Date().getTime() + 900000);
-        // Cookies.set("accessToken", answ.data.accessToken, {
-        //   expires: in15minutes,
-        // });
-        // localStorage.setItem("refreshToken", answ.data.refreshToken);
-        Cookies.set("accessToken", "token here", {
+        Cookies.set("accessToken", answ.data.accessToken, {
           expires: in15minutes,
         });
-        localStorage.setItem("refreshToken", "refresh token here");
+        localStorage.setItem("refreshToken", answ.data.refreshToken);
       } catch (err) {
         setInnerLoading(false);
         if (err?.response?.status == 400) {

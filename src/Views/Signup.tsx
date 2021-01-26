@@ -22,17 +22,13 @@ export default function Signup() {
       try {
         let aux = Object.assign({}, data);
         delete aux["confirm_password"];
-        // const answ = await signup(aux);
-        // console.log(answ.data);
+        const answ = await signup(aux);
+        console.log(answ.data);
         var in15minutes = new Date(new Date().getTime() + 900000);
-        // Cookies.set("accessToken", answ.data.accessToken, {
-        //   expires: in15minutes,
-        // });
-        // localStorage.setItem("refreshToken", answ.data.refreshToken);
-        Cookies.set("accessToken", "token here", {
+        Cookies.set("accessToken", answ.data.accessToken, {
           expires: in15minutes,
         });
-        localStorage.setItem("refreshToken", "refresh token here");
+        localStorage.setItem("refreshToken", answ.data.refreshToken);
 
         setInnerLoading(false);
         // history.push("/notes");

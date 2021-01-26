@@ -23,24 +23,22 @@ function NoteView() {
   const [fetchingNotes, setFetchingNotes] = useState(true);
 
   useEffect(() => {
-    // getNotes()
-    //   .then((resp) => {
-    //     setFetchingNotes(false);
-    //     const data = resp?.notes?.map((note: any) => {
-    //       return {
-    //         id: note["_id"],
-    //         color: note.color,
-    //         note: note.value,
-    //         date: new Date(note.createdAt),
-    //       };
-    //     });
-    //     setNotes(data ?? []);
-    //   })
-    //   .catch((err) => {
-    //     console.log({ err });
-    //   });
-    setFetchingNotes(false);
-    setNotes([]);
+    getNotes()
+      .then((resp) => {
+        setFetchingNotes(false);
+        const data = resp?.notes?.map((note: any) => {
+          return {
+            id: note["_id"],
+            color: note.color,
+            note: note.value,
+            date: new Date(note.createdAt),
+          };
+        });
+        setNotes(data ?? []);
+      })
+      .catch((err) => {
+        console.log({ err });
+      });
   }, []);
 
   return (
@@ -72,23 +70,23 @@ function NoteView() {
             setFetchingNotes(true);
             console.log({ type, note: notes[index] });
             try {
-              // if (type == "add") {
-              //   const answ = await postNote({
-              //     value: notes[index]?.note,
-              //     color: notes[index]?.color,
-              //   });
-              //   notes[index].id = answ?.id;
-              // } else if (type == "update") {
-              //   await updateNote({
-              //     id: notes[index]?.id,
-              //     value: notes[index]?.note,
-              //     color: notes[index]?.color,
-              //   });
-              // } else {
-              //   await deleteNote({
-              //     id,
-              //   });
-              // }
+              if (type == "add") {
+                const answ = await postNote({
+                  value: notes[index]?.note,
+                  color: notes[index]?.color,
+                });
+                notes[index].id = answ?.id;
+              } else if (type == "update") {
+                await updateNote({
+                  id: notes[index]?.id,
+                  value: notes[index]?.note,
+                  color: notes[index]?.color,
+                });
+              } else {
+                await deleteNote({
+                  id,
+                });
+              }
               setFetchingNotes(false);
 
               setNotes(notes);

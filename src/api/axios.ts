@@ -1,11 +1,10 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-axios.defaults.baseURL =
-  process.env.REACT_APP_API_BASE_URL ?? "http://192.168.1.40:8083";
+axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL ?? "API HERE";
 
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL ?? "http://192.168.1.40:8083",
+  baseURL: process.env.REACT_APP_API_BASE_URL ?? "API HERE",
   headers: {
     "Content-Type": "application/json",
   },
