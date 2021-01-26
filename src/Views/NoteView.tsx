@@ -21,6 +21,7 @@ function NoteView() {
   const [notes, setNotes] = useState<Array<Note>>([]);
 
   const [fetchingNotes, setFetchingNotes] = useState(true);
+  const [fetching, setFetching] = useState(false);
 
   useEffect(() => {
     getNotes()
@@ -59,6 +60,7 @@ function NoteView() {
         <Loader />
       ) : (
         <Panel
+          fetching={fetching}
           notes={notes}
           updateNotes={async (
             notes: Array<Note>,
@@ -67,7 +69,7 @@ function NoteView() {
           ) => {
             const index = notes.findIndex((note) => note.id == id);
             // console.log(note);
-            setFetchingNotes(true);
+            setFetching(true);
             console.log({ type, note: notes[index] });
             try {
               if (type == "add") {
@@ -87,7 +89,9 @@ function NoteView() {
                   id,
                 });
               }
-              setFetchingNotes(false);
+              setTimeout(() => {
+                setFetching(false);
+              }, 500);
 
               setNotes(notes);
             } catch (err) {
