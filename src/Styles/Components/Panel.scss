@@ -4,9 +4,6 @@
   height: 100%;
   overflow-y: auto;
   flex: 1;
-  @include media("<=tablet") {
-    padding: 1.5rem 1rem;
-  }
   .header {
     position: -webkit-sticky; /* Safari */
     position: sticky;
