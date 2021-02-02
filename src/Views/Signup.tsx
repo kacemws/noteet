@@ -31,7 +31,7 @@ export default function Signup() {
         localStorage.setItem("refreshToken", answ.data.refreshToken);
 
         setInnerLoading(false);
-        // history.push("/notes");
+        history.push("/");
       } catch (err) {
         console.log({ err });
         setInnerLoading(false);
