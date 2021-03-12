@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import trash from "../Assets/trash.svg";
 import save from "../Assets/save.svg";
 import "../Styles/Components/Card.scss";
@@ -21,6 +21,9 @@ export const Card: React.FC<props> = ({
 }) => {
   const [animate, setAnimate] = useState(false);
   const [value, setValue] = useState("");
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+  const saveButtonRef = useRef<HTMLButtonElement>(null);
+  const isInitialMount = useRef(true);
   useEffect(() => {
     setValue(note.note);
     if (index == 0) {
@@ -33,6 +36,25 @@ export const Card: React.FC<props> = ({
       console.log("changed index");
     }
   }, [note]);
+
+  useEffect(() => {
+    document.addEventListener(
+      "keydown",
+      function (e) {
+        if (
+          (window.navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey) &&
+          e.keyCode == 83
+        ) {
+          e.preventDefault();
+          if (document.activeElement === textAreaRef.current) {
+            console.log("clicked on ctrl+s on element at : " + index);
+            saveButtonRef?.current?.click();
+          }
+        }
+      },
+      false
+    );
+  }, [textAreaRef, saveButtonRef, note]);
   const firstProp = useSpring({
     marginLeft: animate ? "1rem" : "-12.5rem",
     width: animate ? 310 : 0,
@@ -59,6 +81,7 @@ export const Card: React.FC<props> = ({
       <textarea
         placeholder="Type your note"
         value={value}
+        ref={textAreaRef}
         onChange={({ target }) => {
           setValue(target.value);
         }}
@@ -95,6 +118,7 @@ export const Card: React.FC<props> = ({
           )}
           <button
             disabled={value == note.note || !value}
+            ref={saveButtonRef}
             onClick={(_) => {
               // if a note has an id with a length diffrent than 5, we wouldn't change it. if not create a new one
               console.log(note);
